@@ -2,6 +2,9 @@
     font-family: 'OptimusPrinceps';
     src: url('OptimusPrinceps.ttf') format('truetype');
 }
+*{
+  font-family: 'OptimusPrinceps', serif;
+}
 
 body {
     font-family: 'nombre-de-la-fuente', sans-serif;
@@ -16,11 +19,10 @@ body {
 }
 
 body{
-    font-family: 'OptimusPrinceps', serif;
     background-image: url(fondo_ruleta.jpg);
 }
 
-.titulo{
+#titulo{
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -59,7 +61,6 @@ img {
     border: 1px solid black;
     border-radius: 10px;
     /* Usamos la fuente cargada de google fonts. */
-    font-family: 'The Girl Next Door', cursive;
     text-align: center;
     margin-top: 10px;
     margin-left: 10px;
