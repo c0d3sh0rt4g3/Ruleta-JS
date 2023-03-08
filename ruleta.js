@@ -117,7 +117,7 @@ function premios(){
             alert(`Enhorabuena, obtuviste ${bonfire} hogueras.`)
         }
         if(estus >= 2){
-            alert(`Enhorabuena, obtuviste ${bonfire} frascos estus.`)
+            alert(`Enhorabuena, obtuviste ${estus} frascos estus.`)
         }
         if(havel_ring >= 2){
             alert(`Enhorabuena, obtuviste ${havel_ring} anillos de havel.`)
