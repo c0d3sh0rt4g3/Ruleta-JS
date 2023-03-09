@@ -111,6 +111,7 @@ function premios(){
                 break
         }
     }
+    //[`bonfire.png`, `estus.jpg`, `havel_ring.png`, `ember.jpg`];
     let resultados = [bonfire, estus, havel_ring, ember]
     if (bonfire >= 2 || estus >= 2 || havel_ring >= 2 || ember >= 2){
         if (bonfire >= 2){
