@@ -1,7 +1,7 @@
 // Almacenamos los nombres de las imágenes en una let variable compleja.
 // Se denomina tabla y se accede a los valores mediante el índice (empezando por 0).
 // Por ejemplo: imagenes[0] contiene ``rajoy.png``
-let imagenes = [`bonfire.png`, `estus.jpg`, `havel_ring.png`, `ember.jpg`];
+let imagenes = [`./img/bonfire.png`, `./img/estus.jpg`, `./img/zweihander.jpg`, `./img/uchigatana.jpg`];
 // Almacenamos el índice de la imagen que está en cada recuadro.
 let cuadro = [ 0, 0, 0, 0];
 // Almacenamos el setInterval de cada recuadro de forma independiente.
@@ -12,6 +12,7 @@ let corriendo = 0;
 let intervaloSombras;
 let posicionSombras = [[2,2], [-2,2], [-2,-2], [2,-2]];
 let posicionActualSombra = 0;
+let score = 0
 
 // Función que inicia la ruleta.
 function ruleta() {
@@ -62,6 +63,7 @@ function paraRuleta() {
         // Si hemos parado el último activamos el efecto de las sombras.
         if (corriendo === 0){
             premios()
+            decreasePlayerHp()
             cambiaSombras()
         }
     }
@@ -93,8 +95,9 @@ function circulaSombras() {
 function premios(){
     let bonfire = 0
     let estus = 0
-    let havel_ring = 0
-    let ember = 0
+    let zweihander = 0
+    let uchigatana = 0
+    alert(cuadro)
     for(let i of cuadro){
         switch (i){
             case 0:
@@ -104,37 +107,116 @@ function premios(){
                 estus += 1
                 break
             case 2:
-                havel_ring += 1
+                zweihander += 1
                 break
             case 3:
-                ember += 1
+                uchigatana += 1
                 break
         }
     }
-    //[`bonfire.png`, `estus.jpg`, `havel_ring.png`, `ember.jpg`];
-    let resultados = [bonfire, estus, havel_ring, ember]
-    if (bonfire >= 2 || estus >= 2 || havel_ring >= 2 || ember >= 2){
+    let resultados = [bonfire, estus, zweihander, uchigatana]
+    if (bonfire >= 2 || estus >= 2 || zweihander >= 2 || uchigatana >= 2){
         if (bonfire >= 2){
             alert(`Enhorabuena, obtuviste ${bonfire} hogueras.`)
         }
         if(estus >= 2){
             alert(`Enhorabuena, obtuviste ${estus} frascos estus.`)
         }
-        if(havel_ring >= 2){
-            alert(`Enhorabuena, obtuviste ${havel_ring} anillos de havel.`)
+        if(zweihander >= 2){
+            alert(`Enhorabuena, obtuviste ${zweihander} zweihanders.`)
         }
-        if(ember >= 2){
-            alert(`Enhorabuena, obtuviste ${ember} ascuas.`)
+        if(uchigatana >= 2){
+            alert(`Enhorabuena, obtuviste ${uchigatana} uchigatanas.`)
         }
     }else {
         alert(`Por desgracia, no obtuviste nada`)
     }
     alert(resultados)
+    scoreCalc(resultados)
     return resultados
 }
+//let resultados = [bonfire, estus, zweihander, uchigatana]
+function scoreCalc(resultados){
+    let numBonfire = resultados[0]
+    let numEstus = resultados[1]
+    let numZweihander = resultados[2]
+    let numUchigatana = resultados[3]
+    let scoreWrote = document.getElementById("puntosDisplay")
+    if (numBonfire >= 2 || numEstus >= 2 || numZweihander >= 2 || numUchigatana >= 2){
+        if (numBonfire >= 2 && numBonfire < 4){
+            increasePlayerHp()
+            score += 75
+        }else if (numBonfire === 4){
+            increasePlayerHp()
+            increasePlayerHp()
+            score += (75 * 2)
+        }
+        if (numEstus >= 2 && numEstus < 4){
+            score +=  50
+        }else if (numEstus === 4){
+            increasePlayerHp()
+            score += (50 * 2)
+        }
+        if (numZweihander >= 2 && numZweihander < 4){
+            decreaseBossHp()
+            score += 100
+        }else if (numZweihander === 4){
+            decreaseBossHp()
+            decreaseBossHp()
+            score += (100 * 2)
+        }
+        if (numUchigatana >= 2 && numUchigatana < 4){
+            decreaseBossHp()
+            score += 125
+        }else if (numUchigatana === 4){
+            decreaseBossHp()
+            decreaseBossHp()
+            score += (125 * 2)
+        }
+    }else {
+        alert("No has obtenido ningún punto.")
+    }
+    alert(score)
+    scoreWrote.textContent = score.toString()
+    return score
+}
 
-function reproducirAudio() {
+function resetScore(){
+    score = 0
+    document.getElementById("puntosDisplay").textContent = score.toString()
+    return score
+}
+
+function audioPlay() {
     let audio = document.getElementById(`musica`);
+    audio.volume = 0.2
     audio.play();
-  }
+}
+
+function  audioStop(){
+    let audio = document.getElementById(`musica`);
+    audio.pause()
+    audio.currentTime = 0
+}
+
+function decreaseBossHp() {
+    var progressBar = document.getElementById("vidaBoss");
+    var width = parseInt(progressBar.style.width) || 100;
+    width -= 10;
+    progressBar.style.width = width + "%";
+}
+
+function decreasePlayerHp(){
+    var progressBar = document.getElementById("vidaPlayer");
+    var width = parseInt(progressBar.style.width)
+    width -= 10;
+    progressBar.style.width = width + "%";
+}
+
+function increasePlayerHp(){
+    var progressBar = document.getElementById("vidaPlayer");
+    var width = parseInt(progressBar.style.width);
+    width += 11;
+    progressBar.style.width = width + "%";
+}
 

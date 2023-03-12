@@ -2,31 +2,49 @@
     font-family: 'OptimusPrinceps';
     src: url('OptimusPrinceps.ttf') format('truetype');
 }
+
 *{
   font-family: 'OptimusPrinceps', serif;
 }
 
 body {
     font-family: 'nombre-de-la-fuente', sans-serif;
+    background-image: url(img/fondo_ruleta.jpg);
 }
 
 .contenedor {
+    grid-area: main;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 85vh;
 }
 
-body{
-    background-image: url(fondo_ruleta.jpg);
+body {
+  /*display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: 100px;*/
+  grid-template-areas:
+    "headerL header merged"
+    "sidebarL main merged"
+    "footerL footer footerR";
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-rows: repeat(3, 1fr);
+    grid-template-columns: repeat(3, 1fr);
+    height: 100vh;
 }
 
-#titulo{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+.headerR{
+    grid-area: merged;
+}
+
+#titulo {
+  grid-area: header;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .imagenes {
@@ -41,9 +59,9 @@ body{
     background-color: #2be6ff5f;
 }
 
-img {
-    height: 65px;
-    width: 65px;
+#imag0, #imag1, #imag2, #imag3 {
+    height: 85px;
+    width: 85px;
     margin: 8px;
     border: 1px solid black;
     /* Sombra. */
@@ -68,8 +86,9 @@ img {
     box-shadow: 2px 2px 5px #999;
     background-color: #2be6ff5f;
 }
-.premios, .containerPuntos{
-        padding: 10px;
+
+.premios, .puntos{
+    padding: 10px;
     border: 1px solid black;
     /* Bordes redondeados. */
     border-radius: 10px;
@@ -78,6 +97,21 @@ img {
     /* Sombra. */
     /*box-shadow: 2px 2px 5px #66CCFF inset;*/
     background-color: #2be6ff5f;
+    margin: 10px;
+}
+
+.puntos{
+    display: block;
+    margin: 0 auto;
+    height: 100px;
+}
+
+.puntosContent{
+    display: flex;
+    grid-area: sidebarL;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .listaPremios{
@@ -86,6 +120,62 @@ img {
 
 .boton:hover {
     /* Al pasar por encima del bot�n cambia el color de la sombra. */
-    box-shadow: 2px 2px 5px #333;    
+    box-shadow: 2px 2px 5px #333;
+}
+
+.Boss{
+    grid-area: merged;
+    display: flex;
+    justify-content: center;
+}
+
+#gwyn{
+    position: center;
+    height: 900px;
+    width: 700px;
+}
+
+.vidaBossContainer {
+    grid-area: footerR;
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    align-items: center;
+}
+
+.vidaPlayerContainer{
+    grid-area: main;
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    align-items: center;
+}
+
+#vidaBoss, #vidaPlayer{
+    position: relative;
+    bottom: 0;
+    left: 0;
+    width: 650px;
+}
+
+progress[value] {
+  /* Cambiar el aspecto predeterminado de la barra de progreso */
+  appearance: none;
+  border: none;
+  height: 20px;
+  width: 100%;
+  background-color: #f1f1f1;
+  border-radius: 10px;
+}
+
+/* Estilo de la barra de progreso */
+progress[value]::-webkit-progress-bar {
+  background-color: #000000;
+  border-radius: 10px;
+}
+
+progress[value]::-webkit-progress-value {
+  background-color: #b71313;
+  border-radius: 10px;
 }
 
