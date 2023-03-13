@@ -16,11 +16,11 @@ let score = 0
 
 // Función que inicia la ruleta.
 function ruleta() {
+    
     // Solo actúa cuando están los tres recuadros parados.
     if (corriendo === 0) {
         // Para el efecto de las sombras.
         clearInterval(intervaloSombras);
-
         // Sortea la imagen con la que comienza cada recuadro.
             // Math.random() genera un número en el dominio [0-1)
             // Si lo multiplico por tres el dominio pasa a ser [0-3)
@@ -208,13 +208,20 @@ function decreaseBossHp() {
 
 function decreasePlayerHp(){
     var progressBar = document.getElementById("vidaPlayer");
-    var width = parseInt(progressBar.style.width)
+    var width = parseInt(progressBar.style.width) || 100;
     width -= 10;
     progressBar.style.width = width + "%";
+    
+    // Verificar si la barra de vida está a cero
+    if (width <= 0) {
+        alert("Game Over");
+        alert('<iframe width="560" height="315" src="https://www.youtube.com/watch?v=-ZGlaAxB7nI" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>')
+        resetScore();
+    }
 }
 
 function increasePlayerHp(){
-    var progressBar = document.getElementById("vidaPlayer");
+    var progressBar = document.getElementById("vidaPlayer") || 100;
     var width = parseInt(progressBar.style.width);
     width += 11;
     progressBar.style.width = width + "%";
