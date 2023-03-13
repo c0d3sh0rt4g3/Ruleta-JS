@@ -19,13 +19,17 @@
                     <li>2 hogueras = 75 puntos</li>
                     <li>2 estus = 50 puntos</li>
                     <li>2 zweihander = 100 puntos</li>
-                    <li>2 ascuas = 125 puntos</li>
+                    <li>2 uchigatanas = 125 puntos</li>
                 </ul>
             </div>
             <div class="puntos">
                 <h4>TUS ALMAS:</h4>
                 <p id="puntosDisplay">0</p>
-            </div>>
+            </div>
+            <div class="resultado">
+                <h4>ULTIMA TIRADA</h4>
+                <h5 id="mensajeResultado"></h5>
+            </div>
         </div>
         <div class="vidaPlayerContainer">
                 <progress id="vidaPlayer" max="100" value="100"></progress>
@@ -43,7 +47,6 @@
                 <div class="boton" id="parar2" onclick="paraRuleta(); paraRuleta();">Parar 2</div>
                 <div class="boton" id="pararTodo" onclick="paraRuleta(); paraRuleta(); paraRuleta(); paraRuleta();">Parar todo</div>
                 <div class="boton" id="reset" onclick="resetScore(score); audioStop()">Resetear</div>
-                <button onclick="decreasePlayerHp(); decreaseBossHp()">Disminuir</button>
             </div>
         </div>
         <div class="Boss">

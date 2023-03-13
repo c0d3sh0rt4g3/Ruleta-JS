@@ -87,7 +87,7 @@ body {
     background-color: #2be6ff5f;
 }
 
-.premios, .puntos, .mensajeResultado{
+.premios, .puntos, .resultado{
     padding: 10px;
     border: 1px solid black;
     /* Bordes redondeados. */

@@ -13,10 +13,11 @@ let intervaloSombras;
 let posicionSombras = [[2,2], [-2,2], [-2,-2], [2,-2]];
 let posicionActualSombra = 0;
 let score = 0
+let resultMsg = ""
 
 // Función que inicia la ruleta.
 function ruleta() {
-    
+    resetMsg()
     // Solo actúa cuando están los tres recuadros parados.
     if (corriendo === 0) {
         // Para el efecto de las sombras.
@@ -97,7 +98,6 @@ function premios(){
     let estus = 0
     let zweihander = 0
     let uchigatana = 0
-    alert(cuadro)
     for(let i of cuadro){
         switch (i){
             case 0:
@@ -117,21 +117,28 @@ function premios(){
     let resultados = [bonfire, estus, zweihander, uchigatana]
     if (bonfire >= 2 || estus >= 2 || zweihander >= 2 || uchigatana >= 2){
         if (bonfire >= 2){
-            alert(`Enhorabuena, obtuviste ${bonfire} hogueras.`)
+            resultMsg += ` Enhorabuena, obtuviste ${bonfire} hogueras, por tanto te curas.\n`
+            document.getElementById("mensajeResultado").textContent = resultMsg
         }
-        if(estus >= 2){
-            alert(`Enhorabuena, obtuviste ${estus} frascos estus.`)
+        if(estus >= 2 && estus < 4){
+            resultMsg +=` Enhorabuena, obtuviste ${estus} frascos estus.`
+            document.getElementById("mensajeResultado").textContent = resultMsg
+        }else if(estus === 4){
+            resultMsg +=` Enhorabuena, obtuviste ${estus} frascos estus, por tanto te curas.`
+            document.getElementById("mensajeResultado").textContent = resultMsg
         }
         if(zweihander >= 2){
-            alert(`Enhorabuena, obtuviste ${zweihander} zweihanders.`)
+            resultMsg +=` Enhorabuena, obtuviste ${zweihander} zweihanders.`
+            document.getElementById("mensajeResultado").textContent = resultMsg
         }
         if(uchigatana >= 2){
-            alert(`Enhorabuena, obtuviste ${uchigatana} uchigatanas.`)
+            resultMsg += ` Enhorabuena, obtuviste ${uchigatana} uchigatanas.`
+            document.getElementById("mensajeResultado").textContent = resultMsg
         }
     }else {
-        alert(`Por desgracia, no obtuviste nada`)
+        resultMsg = `Por desgracia, no obtuviste nada`
+        document.getElementById("puntosDisplay").textContent = resultMsg
     }
-    alert(resultados)
     scoreCalc(resultados)
     return resultados
 }
@@ -174,9 +181,9 @@ function scoreCalc(resultados){
             score += (125 * 2)
         }
     }else {
-        alert("No has obtenido ningún punto.")
+        score = "No has obtenido ningún punto."
+        document.getElementById("puntosDisplay").textContent = score
     }
-    alert(score)
     scoreWrote.textContent = score.toString()
     return score
 }
@@ -184,7 +191,17 @@ function scoreCalc(resultados){
 function resetScore(){
     score = 0
     document.getElementById("puntosDisplay").textContent = score.toString()
+    var progressBar = document.getElementById("vidaPlayer") || 100;
+    var width = parseInt(progressBar.style.width);
+    width = 100;
+    progressBar.style.width = width + "%";
     return score
+}
+
+function resetMsg(){
+    resultMsg = ""
+    document.getElementById("puntosDisplay").textContent = score.toString()
+    return resetMsg
 }
 
 function audioPlay() {
@@ -204,6 +221,11 @@ function decreaseBossHp() {
     var width = parseInt(progressBar.style.width) || 100;
     width -= 10;
     progressBar.style.width = width + "%";
+
+    if (width <= 0){
+        alert("You win")
+        score += 1000
+    }
 }
 
 function decreasePlayerHp(){
@@ -215,7 +237,6 @@ function decreasePlayerHp(){
     // Verificar si la barra de vida está a cero
     if (width <= 0) {
         alert("Game Over");
-        alert('<iframe width="560" height="315" src="https://www.youtube.com/watch?v=-ZGlaAxB7nI" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>')
         resetScore();
     }
 }
