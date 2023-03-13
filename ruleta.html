@@ -3,21 +3,23 @@
     <head>
         <meta charset="utf-8">
         <title>DARK SOULS ROULETTE</title>
-        <link href='./OptimusPrinceps.ttf' rel='stylesheet' type='text/css'>
-        <link href='./ruleta.css' rel='stylesheet' type='text/css'>
-        <script src="./ruleta.js" type="text/javascript"></script>
+        <link href='fonts/OptimusPrinceps.ttf' rel='stylesheet' type='text/css'>
+        <link href='style/ruleta.css' rel='stylesheet' type='text/css'>
+        <script src="scripts/ruleta.js" type="text/javascript"></script>
     </head>
     <body onload="cambiaSombras();">
         <div id="titulo"><h1>DARK SOULS ROULETTE</h1></div>
         <audio id="musica">
-            <source src="Dark Souls - Gwyn, Lord Of Cinder - Theme Song.mp3" type="audio/mp3">
+            <source src="media/Dark%20Souls%20-%20Gwyn,%20Lord%20Of%20Cinder%20-%20Theme%20Song.mp3" type="audio/mp3">
         </audio>
         <div class="puntosContent">
             <div class="premios">
                 <h4>PREMIOS</h4>
                 <ul class="listaPremios">
-                    <li>2 hogueras = 75 puntos</li>
+                    <li>2 hogueras = 75 puntos y curacion</li>
+                    <li>4 hogueras = 150 puntos y curacion * 2</li>
                     <li>2 estus = 50 puntos</li>
+                    <li>4 estus = 100 puntos y curacion</li>
                     <li>2 zweihander = 100 puntos</li>
                     <li>2 uchigatanas = 125 puntos</li>
                 </ul>
@@ -46,7 +48,6 @@
                 <div class="boton" id="parar" onclick="paraRuleta();">Parar</div>
                 <div class="boton" id="parar2" onclick="paraRuleta(); paraRuleta();">Parar 2</div>
                 <div class="boton" id="pararTodo" onclick="paraRuleta(); paraRuleta(); paraRuleta(); paraRuleta();">Parar todo</div>
-                <div class="boton" id="reset" onclick="resetScore(score); audioStop()">Resetear</div>
             </div>
         </div>
         <div class="Boss">
